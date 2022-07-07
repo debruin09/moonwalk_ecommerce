@@ -1,44 +1,21 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 
-// Create data / vars
-const router = useRouter();
-const email = ref(null);
-const password = ref(null);
-const errorMsg = ref(null);
-
-const login = async () => {
-  try {
-    // const { error } = await supabase.auth.signIn({
-    //   email: email.value,
-    //   password: password.value,
-    // });
-
-    // if (error) throw error;
-    router.push({ name: "Home" });
-  } catch (error) {
-    errorMsg.value = `Error: ${error.message}`;
-    setTimeout(() => {
-      errorMsg.value = null;
-    }, 5000);
-  }
-  return;
-};
 </script>
 
 
 <template>
-  <div class="max-w-screen-sm mx-auto px-4 py-10">
+  <div class="max-w-screen-sm mx-auto px-4">
     <!-- Error Handling-->
-    <div v-if="errorMsg" class="mb-10 p-4 rounded-md shadow-lg">
+    <!-- <div v-if="errorMsg" class="mb-10 p-4 rounded-md shadow-lg">
       <p class="text-red-500">{{ errorMsg }}</p>
-    </div>
+    </div> -->
 
     <!--Login -->
-    <form @submit.prevent="login" class="p-10 mt-14 flex flex-col">
+    <!-- <form @submit.prevent="login" class="p-10 mt-14 flex flex-col"> -->
+    <form class="p-10 flex flex-col">
       <h1 class="text-3xl text-at-light-green mb-4">Login</h1>
-
       <div class="mt-8">
         <div class="flex justify-between items-center">
           <div class="text-sm font-bold text-gray-700 tracking-wide">Email</div>
