@@ -70,7 +70,7 @@ const store = useCart();
                             </div>
                         </transition>
 
-                        <cart-icon />
+                        <CartIcon />
                     </div>
                 </div>
             </div>
