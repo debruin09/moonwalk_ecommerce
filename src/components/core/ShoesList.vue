@@ -13,7 +13,7 @@ const allStore = useAllShoes();
 </script>
 
 <template>
-  <div class="flex flex-col w-full lg:2/3">
+  <div class="flex px-3 flex-col w-full lg:2/3">
     <ProductSection :sectionName="'Nikes'" :shoes="allStore.nikes" />
     <ProductSection :sectionName="'Adidas'" :shoes="allStore.adidas" />
     <ProductSection :sectionName="'Jordans'" :shoes="allStore.jordans" />

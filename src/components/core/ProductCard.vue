@@ -13,7 +13,7 @@ const props = defineProps<Props>()
   <router-link :to="`/brand/${shoe.data.brand}/${shoe.id}`">
   
     <div
-      class="flex flex-col font-roboto overflow-hidden transition duration-500 hover:shadow-lg border-2 border-gray-300  w-full h-56 lg:h-full ">
+      class="flex flex-col font-roboto overflow-hidden transition duration-500 hover:shadow-lg border-2 border-gray-300 bg-white  w-full h-56 lg:h-full ">
       <img class="object-fill w-full h-28 lg:h-44" :src="shoe.data.image" alt="Shoe" />
       <div class="px-5 py-3">
         <div class="flex flex-row justify-between space-x-1">

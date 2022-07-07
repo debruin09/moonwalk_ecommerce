@@ -5,10 +5,9 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-
 </script>
 <template>
-  <div class="flex flex-col bg-white ">
+  <div class="flex w-full flex-col bg-white ">
     <h1 class="
         flex
         py-5

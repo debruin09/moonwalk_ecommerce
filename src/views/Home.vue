@@ -16,7 +16,7 @@ onMounted(() => {
 
 <template>
   <div class="min-h-screen font-mont">
-    <div class="flex px-10 flex-col md:flex-col">
+    <div class="flex  space-y-5 flex-col md:flex-col">
       <LatestProducts />
       <OurBrands />
       <ShoesList :shoes="allStore.all.shoes" />

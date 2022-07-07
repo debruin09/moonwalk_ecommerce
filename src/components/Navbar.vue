@@ -88,7 +88,7 @@ const store = useCart();
     </nav>
     <!--- Mobile Search  -->
     <div :class="toggleSearchState ? 'app-search-open' : 'hidden app-search-close duration-500 transition ease-linear'"
-        class="app-search font-roboto  w-full flex flex-col bg-gray-100 h-16">
+        class="app-search fixed font-roboto  w-full flex flex-col bg-gray-100 h-screen ">
         <div class="flex justify-between items-center px-5 py-3">
             <div class="flex w-full ease-in-out duration-500 transition">
                 <input type="search"

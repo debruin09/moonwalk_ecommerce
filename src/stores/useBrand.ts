@@ -1,38 +1,31 @@
 import { defineStore } from "pinia";
 import { db } from "../firebase/init";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  limit,
-} from "firebase/firestore";
+import { collection, getDocs, query, where, limit } from "firebase/firestore";
 import { Product } from "../stores/useCart";
 import { fromFirestore } from "../utils/firebaseUtils";
 import { ShoesState } from "./useFirestore";
 
-
 type BrandInitial = {
-    state: "init"
-}
+  state: "init";
+};
 
 type BrandIsLoading = {
-    state: "loading"
+  state: "loading";
 };
 type BrandLoadedSuccess = {
-    state: "success"
-    reposnse: {
-
-    } 
+  state: "success";
+  reposnse: {};
 };
 type BrandError = {
-    state: "error"
-    response: {
-
-    }
+  state: "error";
+  response: {};
 };
 
-type BrandState = BrandInitial | BrandIsLoading | BrandLoadedSuccess | BrandError;
+type BrandState =
+  | BrandInitial
+  | BrandIsLoading
+  | BrandLoadedSuccess
+  | BrandError;
 
 export const useBrandShoes = defineStore("brandShoes", {
   state: () => ({

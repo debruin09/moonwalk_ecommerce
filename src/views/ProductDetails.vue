@@ -29,7 +29,15 @@
  
  // Route values
  const productId: string = route.params.productId.toString();
- const brandName = route.params.brandName;
+ const brandName: string = route.params.brandName as string;
+
+ const brandNameLowerCased = (bname: string)  => {
+  let s= bname[0];
+  for (let index = 1; index < bname.length; index++) {
+    s = s + (bname[index]).toLowerCase()
+  }
+  return s;
+ }
  
  // Current chosen product
  const quantity = ref(1);
@@ -38,7 +46,7 @@
  // Get data
  onMounted(() => {
    productStore.getProduct(productId);
-   brandStore.getBrandfromPage(brandName, quantity.value);
+   brandStore.getBrandfromPage(brandNameLowerCased(brandName), quantity.value);
  });
  
  // Change when the size changes
@@ -169,7 +177,7 @@
           </div>
         </form>
       </div>
-      <div>
+      <div class="flex w-screen h-full">
         <RelatedProducts :relatedProducts="brandStore.brand.shoes" />
       </div>
     </div>
