@@ -123,7 +123,7 @@
     <NotificationMsg :notificationMsg="notificationMsg" />
 
     <!-- Product details Content -->
-    <div class="min-h-screen flex flex-col p-10 ">
+    <div class="min-h-screen flex flex-col ">
       <div class="flex flex-col md:flex-row">
         <div class="lg:flex-2 relative bg-gray-200">
           <img :src="productStore.product.shoe.data.image" class="inset-0 lg:py-16 w-full h-full object-cover" />
