@@ -1,19 +1,19 @@
  <script setup lang="ts">
-import { Product } from '../../stores/useCart';
-
-interface Props {
-  shoe: Product
-}
-
-const props = defineProps<Props>()
-
-
-</script>
+ import { Product } from '../../stores/useCart';
+ 
+ interface Props {
+   shoe: Product
+ }
+ 
+ const props = defineProps<Props>()
+ 
+ 
+ </script>
 <template>
   <router-link :to="`/brand/${shoe.data.brand}/${shoe.id}`">
-  
+
     <div
-      class="flex flex-col font-roboto overflow-hidden transition duration-500 hover:shadow-lg border-2 border-gray-300 bg-white  w-full h-56 lg:h-full ">
+      class="flex flex-col font-roboto overflow-hidden transition duration-500 hover:shadow-lg  bg-white  w-full h-56 lg:h-full ">
       <img class="object-fill w-full h-28 lg:h-44" :src="shoe.data.image" alt="Shoe" />
       <div class="px-5 py-3">
         <div class="flex flex-row justify-between space-x-1">
@@ -23,10 +23,11 @@ const props = defineProps<Props>()
         </div>
         <div class="text-gray-800 font-extralight text-sm mb-2">R{{ shoe.data.price.toFixed(2) }}</div>
       </div>
-      <div class="bg-black text-white flex justify-center text-sm items-center lg:py-3 border duration-500 font-extralight h-full transition hover:bg-white hover:text-black">
+      <div
+        class="bg-black text-white flex justify-center text-sm items-center lg:py-3 border duration-500 font-extralight h-full transition hover:bg-white hover:text-black">
         ADD TO CART
       </div>
-    </div> 
+    </div>
   </router-link>
 </template>
 

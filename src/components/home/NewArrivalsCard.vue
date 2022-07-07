@@ -12,7 +12,7 @@
 <template>
     <router-link :to="`/brand/${shoe.data.brand}/${shoe.id}`">
         <div
-            class="flex flex-col font-roboto overflow-hidden transition duration-500  bg-white  w-full h-80 lg:h-full ">
+            class="flex flex-col font-roboto overflow-hidden transition duration-500  bg-white  w-screen p-4 h-80 lg:h-full ">
             <div class="w-full h-60">
                 <img class="object-fill w-full h-full" :src="shoe.data.image" alt="Shoe" />
             </div>

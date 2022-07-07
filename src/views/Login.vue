@@ -20,20 +20,13 @@ import { useRouter } from "vue-router";
         <div class="flex justify-between items-center">
           <div class="text-sm font-bold text-gray-700 tracking-wide">Email</div>
         </div>
-        <input
-          class="
+        <input class="
             w-full
             text-lg
             py-2
             border-b border-gray-300
             focus:outline-none focus:border-indigo-500
-          "
-          type="text"
-          required
-          placeholder="Enter your email"
-          id="email"
-          v-model="email"
-        />
+          " type="text" required placeholder="Enter your email" id="email" />
       </div>
 
       <div class="mt-8">
@@ -42,38 +35,27 @@ import { useRouter } from "vue-router";
             Password
           </div>
           <div>
-            <a
-              class="
+            <a class="
                 text-xs
                 font-display font-semibold
                 text-indigo-600
                 hover:text-indigo-800
                 cursor-pointer
-              "
-            >
+              ">
               Forgot Password?
             </a>
           </div>
         </div>
-        <input
-          class="
+        <input class="
             w-full
             text-lg
             py-2
             border-b border-gray-300
             focus:outline-none focus:border-indigo-500
-          "
-          type="password"
-          required
-          placeholder="Enter your password"
-          id="password"
-          v-model="password"
-        />
+          " type="password" required placeholder="Enter your password" id="password" />
       </div>
 
-      <button
-        type="submit"
-        class="
+      <button type="submit" class="
           w-full
           mt-6
           py-2
@@ -85,8 +67,7 @@ import { useRouter } from "vue-router";
           duration-200
           border-solid border-2 border-transparent
           hover:border-black hover:bg-white hover:text-black
-        "
-      >
+        ">
         Login
       </button>
 
