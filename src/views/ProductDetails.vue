@@ -8,6 +8,7 @@
  import NotificationMsg from "../components/product_detail/NotificationMsg.vue";
  import { shoeSizes } from "../utils/constants";
  import FilterCollapse from "../components/FilterCollapse.vue";
+ import FilterModal from "../components/product_detail/FilterModal.vue";
  
  export interface NotificationMessage {
    msg: string | null;
@@ -114,6 +115,8 @@
      }, 3000);
    }
  };
+ 
+ const animatedModalVisible = ref(false)
  </script>
 
 
@@ -126,9 +129,13 @@
       <div class=" flex items-center pl-4">
         <span>50 Results</span>
       </div>
-      <div class="flex  bg-gray-200 items-center justify-center m-3 px-2 py-1 rounded-full border w-14 focus:border-black active:bg-gray-300">
-        <vue-feather stroke="black" type="filter"></vue-feather>
+
+      <div class="flex items-center justify-center border rounded-full px-3 py-1 m-3 bg-gray-200 active:bg-gray-300">
+        <vue-feather @click="animatedModalVisible = true" stroke="black" type="filter"></vue-feather>
       </div>
+      <Teleport to="body">
+        <FilterModal :visible="animatedModalVisible" @close="animatedModalVisible = false" />
+      </Teleport>
     </div>
 
     <!-- Product details Content -->
