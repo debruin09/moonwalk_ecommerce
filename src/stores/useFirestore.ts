@@ -67,7 +67,7 @@ export const useAllShoes = defineStore('allShoes', {
     }
 })
 
-
+// filtereing shoes abstarct functions
 const filterShoesComp = (shoes: Product[], name: String) => {
     return shoes
         .filter((shoe) => {
@@ -77,6 +77,7 @@ const filterShoesComp = (shoes: Product[], name: String) => {
 };
 
 
+//  Get the promocodes from firestore
 export const usePromocodes = defineStore('promocodes', {
     state: () => ({
         promocodes: {

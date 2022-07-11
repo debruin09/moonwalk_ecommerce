@@ -21,9 +21,8 @@ onMounted(() => {
     <div v-if="!latestStore.latest.isLoading" class="pt-10  grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
       <LatestProductSkeleton />
     </div>
-    <div v-else class="pt-10  lg:grid-cols-4 ">
-      <div class="flex w-full flex-col bg-white">
-        <h1 class="flex py-5 mx-5 font-bold text-2xl text-gray-800">RELATED PRODUCTS</h1>
+    <div v-else class="pt-10 lg:grid-cols-4 ">
+      <div class="flex w-full flex-col ">
         <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
           <div class="flex flex-nowrap">
             <div v-for="shoe in latestStore.latest.shoes" :key="shoe.id" class="inline-block px-3">
@@ -38,9 +37,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <!-- <div v-for="shoe in latestStore.latest.shoes" :key="shoe.id">
-        <NewArrivalsCard :shoe="shoe" />
-      </div> -->
     </div>
   </div>
 </template>

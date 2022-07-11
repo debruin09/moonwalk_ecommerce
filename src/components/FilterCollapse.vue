@@ -3,7 +3,6 @@ import { onMounted } from "@vue/runtime-core";
 import { useRouter, useRoute } from "vue-router";
 import useFilter from "../composables/useFilter";
 import { ref } from "vue";
-import { db } from "../firebase/init";
 
 const filteredData = ref([]);
 const queryStr = ref(null);

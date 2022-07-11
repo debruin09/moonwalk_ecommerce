@@ -7,6 +7,7 @@
  import { useProduct } from "../stores/useProduct";
  import NotificationMsg from "../components/product_detail/NotificationMsg.vue";
  import { shoeSizes } from "../utils/constants";
+ import FilterCollapse from "../components/FilterCollapse.vue";
  
  export interface NotificationMessage {
    msg: string | null;
@@ -30,13 +31,13 @@
  // Route values
  const productId: string = route.params.productId.toString();
  const brandName: string = route.params.brandName as string;
-
- const brandNameLowerCased = (bname: string)  => {
-  let s= bname[0];
-  for (let index = 1; index < bname.length; index++) {
-    s = s + (bname[index]).toLowerCase()
-  }
-  return s;
+ 
+ const brandNameLowerCased = (bname: string) => {
+   let s = bname[0];
+   for (let index = 1; index < bname.length; index++) {
+     s = s + (bname[index]).toLowerCase()
+   }
+   return s;
  }
  
  // Current chosen product
@@ -118,13 +119,21 @@
 
 
 <template>
-  <div class="flex flex-row md:flex-col font-roboto " v-if="productStore.product.isLoading">
-    <!-- Notify user too choose a size -->
+  <div class="flex flex-col  font-roboto " v-if="productStore.product.isLoading">
+    <!-- Notify user toocol choose a size -->
     <NotificationMsg :notificationMsg="notificationMsg" />
+    <div class="flex  justify-between border ">
+      <div class=" flex items-center pl-4">
+        <span>50 Results</span>
+      </div>
+      <div class="flex  bg-gray-200 items-center justify-center m-3 px-2 py-1 rounded-full border w-14 focus:border-black active:bg-gray-300">
+        <vue-feather stroke="black" type="filter"></vue-feather>
+      </div>
+    </div>
 
     <!-- Product details Content -->
     <div class="min-h-screen flex flex-col ">
-      <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col md:flex-row lg:px-10">
         <div class="lg:flex-2 relative bg-gray-200">
           <img :src="productStore.product.shoe.data.image" class="inset-0 lg:py-16 w-full h-full object-cover" />
         </div>
@@ -177,7 +186,7 @@
           </div>
         </form>
       </div>
-      <div class="flex w-screen h-full">
+      <div class="flex w-screen h-full lg:px-10">
         <RelatedProducts :relatedProducts="brandStore.brand.shoes" />
       </div>
     </div>
