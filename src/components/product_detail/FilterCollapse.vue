@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "@vue/runtime-core";
 import { useRouter, useRoute } from "vue-router";
-import useFilter from "../composables/useFilter";
+import useFilter from "../../composables/useFilter";
 import { ref } from "vue";
 
 const filteredData = ref([]);
@@ -29,10 +29,10 @@ const filteredSizesList = ref([]);
 const router = useRouter();
 
 const filterByBrand = (e: any) => {
-  router.push({
-    name: "FilterShoes",
-    params: { queryString: queryStr.value },
-  });
+  // router.push({
+  //   name: "FilterShoes",
+  //   params: { queryString: queryStr.value },
+  // });
 };
 </script>
 

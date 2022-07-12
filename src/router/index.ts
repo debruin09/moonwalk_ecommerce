@@ -1,21 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import ProductDetails from '../views/ProductDetails.vue'
-import Brand from '../views/Brand.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Checkout from '../views/Checkout.vue'
-import Cart from '../views/Cart.vue'
-// import Account from '../views/Account.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import ProductDetails from "../views/ProductDetails.vue";
+import Brand from "../views/Brand.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Checkout from "../views/Checkout.vue";
+import Cart from "../views/Cart.vue";
+import QueryShoes from "../views/QueryShoes.vue";
 // import FilterShoes from '../views/FilterShoes.vue'
 // import { computed } from 'vue'
 
-
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
     path: "/login",
@@ -28,26 +27,31 @@ const routes = [
     component: Register,
   },
   {
-    path: '/brand/:brandName/:productId/',
-    name: 'Product',
+    path: "/brand/:brandName/:productId/",
+    name: "Product",
     component: ProductDetails,
   },
   {
-    path: '/brand/:brandName/',
-    name: 'Brand',
+    path: "/brand/:brandName/",
+    name: "Brand",
     component: Brand,
   },
   {
-    path: '/cart/checkout',
-    name: 'Checkout',
+    path: "/q/:queryStr/",
+    name: "QueryShoes",
+    component: QueryShoes,
+  },
+  {
+    path: "/cart/checkout",
+    name: "Checkout",
     component: Checkout,
     // meta: {
     //   requiresAuth: truFilterCollapsee,
     // }
   },
   {
-    path: '/cart',
-    name: 'Cart',
+    path: "/cart",
+    name: "Cart",
     component: Cart,
   },
 
@@ -56,12 +60,12 @@ const routes = [
   //   name: 'Account',
   //   component: Account,
   // },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
 // const user = computed(() =>
 //   store.state.user
@@ -76,5 +80,4 @@ const router = createRouter({
 //   }
 // })
 
-export default router
-
+export default router;

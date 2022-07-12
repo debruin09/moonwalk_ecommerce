@@ -28,7 +28,7 @@ type BrandState =
   | BrandError;
 
 export const useBrandShoes = defineStore("brandShoes", {
-  state: () => ({
+  state: ()  => ({
     brand: {
       isLoading: false,
       shoes: [] as Product[],

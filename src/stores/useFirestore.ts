@@ -11,6 +11,8 @@ export interface ShoesState {
     error: string
 }
 
+
+
 export const useLatestShoes = defineStore('latestShoes', {
     state: () => ({
         latest: {
