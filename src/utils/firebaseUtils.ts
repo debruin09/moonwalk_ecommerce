@@ -23,9 +23,17 @@ export const fromURLToQueryStr = (url: string): SortQuery => {
   const arr = url.split("-");
   return {
     type: "orderBy",
-    sortBy: arr[0],
+    sortBy: fromSlugToFirebase(arr[0]),
+    slug: arr[0],
     order: arr[1] as OrderByDirection,
+  };
+};
+
+const fromSlugToFirebase = (s: string) => {
+  if (s === "newest") {
+    return "timestamp";
   }
+  return "price";
 };
 
 const IMAGE_KIT_URL = "https://ik.imagekit.io/sjsedov4q/";

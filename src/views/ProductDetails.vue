@@ -125,11 +125,7 @@
   <div class="flex flex-col  font-roboto " v-if="productStore.product.isLoading">
     <!-- Notify user toocol choose a size -->
     <NotificationMsg :notificationMsg="notificationMsg" />
-    <div class="flex  justify-between border ">
-      <div class=" flex items-center pl-4">
-        <span>50 Results</span>
-      </div>
-
+    <div class="flex  justify-end border ">
       <div class="flex items-center justify-center border rounded-full px-3 py-1 m-3 bg-gray-200 active:bg-gray-300">
         <vue-feather @click="animatedModalVisible = true" stroke="black" type="filter"></vue-feather>
       </div>

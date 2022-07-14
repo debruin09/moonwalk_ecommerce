@@ -21,16 +21,19 @@ interface FilterError {
 interface NewestShoes {
   type: string;
   sortBy: string;
+  slug: string;
   order: OrderByDirection;
 }
 interface LowestToHighest {
   type: string;
   sortBy: string;
+  slug: string;
   order: OrderByDirection;
 }
 interface HighestToLowest {
   type: string;
   sortBy: string;
+  slug: string;
   order: OrderByDirection;
 }
 
@@ -69,23 +72,19 @@ export const useFilter = defineStore("filterShoes", {
     // },
     // Implement sort
     async getSortData(queryStr: SortQuery) {
-      await getDocs(
-        query(collection(db, "all"), orderBy(queryStr.sortBy, queryStr.order))
-      )
-        .then((snapshot) =>
-          snapshot.docs.map((doc) => {
-            this.filterState.shoes.push({
-              data: fromFirestore(doc.data()),
-              id: doc.id,
-              quantity: 0,
-            });
-            this.filterState.isLoading = true;
-          })
-        )
-        .catch((err) => {
-          this.filterState.error = err;
-          this.filterState.isLoading = true;
+      this.filterState.shoes = [];
+      const qSnap = await getDocs(
+        query(collection(db, "all"), orderBy(queryStr.sortBy, queryStr.order), limit(5))
+      );
+
+      qSnap.docs.map((doc) => {
+        this.filterState.shoes.push({
+          data: fromFirestore(doc.data()),
+          id: doc.id,
+          quantity: 0,
         });
+        this.filterState.isLoading = true;
+      });
     },
   },
 });

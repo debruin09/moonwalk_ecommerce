@@ -1,26 +1,19 @@
 <script setup lang="ts">
-import { querystring, querystringDecode } from '@firebase/util';
 import { ref } from 'vue';
-import { useRoute, useRouter } from "vue-router"
-import { fromURLToQueryStr } from '../../utils/firebaseUtils';
+import { useRouter } from "vue-router"
 
 const props = defineProps({
     visible: Boolean,
 });
-
+const emit = defineEmits(['close'])
 
 const router = useRouter()
-const route = useRoute()
-
-// const getUrl = route.params.queryStr as string
 
 const picked = ref("");
 
-
-// const { type, sortBy, order } = fromURLToQueryStr(getUrl)
-
 const changePick = () => {
-    router.push({ name: "QueryShoes", params: { queryStr: picked.value } })
+    emit("close")
+    router.push({ name: "QueryShoes", query: { orderBy: picked.value.split("-")[0], order: picked.value.split("-")[1] } })
 }
 
 </script>
@@ -37,18 +30,18 @@ const changePick = () => {
                 <div class="sort-by-wrapper py-5">
                     <h3 class="py-3">Sort By</h3>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="sort" type="radio" name="newest" value="timeStamp" class="radio"
-                            v-model="picked" />
+                        <input @change="changePick" id="sort" type="radio" name="newest" value="newest-asc"
+                            class="radio" v-model="picked" />
                         <label for="sort" class="ml-2  text-black text-lg dark:text-gray-300">Newest</label>
                     </div>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="hl" type="radio" name="hl" value="price-high-low" class="radio"
+                        <input @change="changePick" id="hl" type="radio" name="hl" value="highLow-asc" class="radio"
                             v-model="picked" />
                         <label for="hl" class="ml-2  text-black text-lg dark:text-gray-300">Price:
                             Hight-Low</label>
                     </div>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="lh" type="radio" name="lh" value="price-low-high" class="radio"
+                        <input @change="changePick" id="lh" type="radio" name="lh" value="lowHigh-asc" class="radio"
                             v-model="picked" />
                         <label for="lh" class="ml-2 text-black text-lg dark:text-gray-300">Price:
                             Low-High</label>

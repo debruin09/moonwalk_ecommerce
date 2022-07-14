@@ -37,7 +37,7 @@ const routes = [
     component: Brand,
   },
   {
-    path: "/q/:queryStr/",
+    path: "/q",
     name: "QueryShoes",
     component: QueryShoes,
   },
