@@ -4,22 +4,33 @@ import { ref } from "@vue/reactivity";
 import SearchBar from "./nav/SearchBar.vue";
 import MoonwalkLogo from "./nav/MoonwalkLogo.vue";
 import CartIcon from "./nav/CartIcon.vue";
-
+import { useRouter } from "vue-router";
 
 const toggleMenuState = ref(false);
 const toggleMenu = () => {
-    toggleMenuState.value = !toggleMenuState.value
-}
+    toggleMenuState.value = !toggleMenuState.value;
+};
+
 const toggleSearchState = ref(false);
 const toggleSearch = () => {
-    toggleSearchState.value = !toggleSearchState.value
-}
+    toggleSearchState.value = !toggleSearchState.value;
+};
+
+// Search Functionality
+const searchVal = ref("");
+
+const router = useRouter();
+const searchSubmit = () => {
+    toggleSearch();
+    router.push({ name: "QueryShoes", query: { search: searchVal.value } });
+};
+
 </script>
 
 <template>
     <!--  Mobile Menu  -->
     <div :class="toggleMenuState ? 'app-navbar-open' : 'app-navbar-close'"
-        class="z-50 app-navbar fixed font-roboto overflow-x-scroll  w-full flex flex-col  bg-white top-0 h-screen">
+        class="z-50 app-navbar fixed font-roboto overflow-x-scroll w-full flex flex-col bg-white top-0 h-screen">
         <div class="flex justify-between items-center px-5">
             <div class="flex content-center py-4 text-center justify-center items-center font-bold pt-5">
                 MOONWALK
@@ -27,35 +38,36 @@ const toggleSearch = () => {
             <div class="flex items-center justify-center">
                 <vue-feather @click="toggleMenu()" stroke="black" type="x"></vue-feather>
             </div>
-
         </div>
         <div>
-            <router-link @click="toggleMenu()" class="block py-2 px-4 underline" :to="{ name: 'Home' }">HOME</router-link>
-            <router-link @click="toggleMenu()" class="block py-2 px-4 underline" :to="{ name: 'Login' }">LOGIN</router-link>
+            <router-link @click="toggleMenu()" class="block py-2 px-4 underline" :to="{ name: 'Home' }">HOME
+            </router-link>
+            <router-link @click="toggleMenu()" class="block py-2 px-4 underline" :to="{ name: 'Login' }">LOGIN
+            </router-link>
         </div>
     </div>
     <!--  Mobile Search  -->
     <div :class="toggleSearchState ? 'app-navbar-open' : 'app-search-close'"
-        class="z-50 app-search fixed font-roboto overflow-x-scroll  w-full flex flex-col  bg-white top-0 h-screen">
-        <div class="flex justify-between items-center py-5 ">
+        class="z-50 app-search fixed font-roboto overflow-x-scroll w-full flex flex-col bg-white top-0 h-screen">
+        <div class="flex justify-between items-center py-5">
             <div class="flex flex-col">
                 <div class="flex justify-between items-center px-5">
-                    <div class="flex  justify-between items-center px-5 py-3">
+                    <div class="flex justify-between items-center px-5 py-3">
                         <div class="flex w-full space-x-2 ease-in-out duration-500 transition">
                             <span
-                                class="flex rounded-full  items-center px-3 py-1.5 text-base font-normal bg-gray-200 text-gray-700 text-center whitespace-nowrap "
+                                class="flex rounded-full items-center px-3 py-1.5 text-base font-normal bg-gray-200 text-gray-700 text-center whitespace-nowrap"
                                 id="basic-addon2">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"
-                                    class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <svg @click="searchSubmit" aria-hidden="true" focusable="false" data-prefix="fas"
+                                    data-icon="search" class="w-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512">
                                     <path fill="currentColor"
                                         d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
                                     </path>
                                 </svg>
                             </span>
-                            <input type="search"
-                                class="relative rounded-full  flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding  transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            <input v-model="searchVal" type="search"
+                                class="relative rounded-full flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
-
                         </div>
                     </div>
                     <div class="flex items-center justify-center rounded-full p-2 bg-slate-200">
@@ -65,14 +77,23 @@ const toggleSearch = () => {
                 <div class="px-5 py-5">
                     <h2 class="font-semibold">Suggestions</h2>
                     <div class="py-5 flex flex-col">
-                        <a>Nike</a>
-                        <a>Adida</a>
+                        <router-link @click="toggleSearch" :to="{ name: 'Brand', params: { brandName: 'Nike' } }"
+                            class="underline">Nike
+                        </router-link>
+                        <router-link @click="toggleSearch" :to="{ name: 'Brand', params: { brandName: 'Adida' } }"
+                            class="underline">Adida
+                        </router-link>
+                        <router-link @click="toggleSearch" :to="{ name: 'Brand', params: { brandName: 'Puma' } }"
+                            class="underline">Puma
+                        </router-link>
+                        <router-link @click="toggleSearch" :to="{ name: 'Brand', params: { brandName: 'Converse' } }"
+                            class="underline">
+                            Converse</router-link>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Desktop Menu-->
     <nav class="bg-white">
@@ -100,7 +121,7 @@ const toggleSearch = () => {
                             <!-- <router-link :to="{ name: 'Account' }" class="link">Account</router-link> -->
                         </div>
                         <transition>
-                            <div class="flex md:hidden items-center justify-center ">
+                            <div class="flex md:hidden items-center justify-center">
                                 <vue-feather @click="toggleSearch()" stroke="black"
                                     :type="toggleSearchState ? 'x' : 'search'">
                                 </vue-feather>
@@ -112,18 +133,7 @@ const toggleSearch = () => {
                 </div>
             </div>
         </div>
-
-
-        <!-- Mobile Menu-->
-
-        <!-- <transition name="mobile-menu">
-            <div class="flex flex-col bg-white pb-10 md:hidden" v-show="showMobileMenu">
-                <router-link class="block py-2 px-4 hover:bg-light-dark" :to="{ name: 'Home' }">Home</router-link>
-                <router-link class="block py-2 px-4 hover:bg-light-dark" :to="{ name: 'Login' }">Login</router-link>
-            </div>
-        </transition> -->
     </nav>
-
 </template>
 
 <style scoped>

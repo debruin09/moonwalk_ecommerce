@@ -7,25 +7,35 @@ import { useFilter } from "../stores/useFilter";
 import { fromURLToQueryStr } from "../utils/firebaseUtils";
 import FilterModal from "../components/product_detail/FilterModal.vue";
 import { OrderByDirection } from 'firebase/firestore';
+import { useBrandShoes } from '../stores/useBrand';
+import { Ref } from '@vue/reactivity';
 
 const animatedModalVisible = ref(false);
 
+
 //! Makes getBrand call but does not remove old query
 const store = useFilter();
-
+const brandStore = useBrandShoes()
 const route = useRoute();
 
-const sortBy = route.query.orderBy as string;
-const order = route.query.order as OrderByDirection;
+const querySearch = () => {
+    if (route.fullPath.includes("search")) {
+        store.searchQuery(route.query.search as string)
+    } 
+    else {
+        store.getSortData(fromURLToQueryStr({ sortBy: route.query.orderBy as string, order: (route.query.order as OrderByDirection) }));
+    }
+}
+
 
 onMounted(() => {
-    store.getSortData(fromURLToQueryStr({ sortBy, order: (route.query.order as OrderByDirection) }));
+    querySearch()
 });
 watch(
     () => route.query,
     (_, __) =>
         (route.name === "QueryShoes")
-            ? store.getSortData(fromURLToQueryStr({ sortBy, order: (route.query.order as OrderByDirection) }))
+            ? querySearch()
             : {}
 );
 </script>

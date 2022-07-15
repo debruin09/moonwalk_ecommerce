@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore, _StoreWithActions } from "pinia";
 import { db } from "../firebase/init";
 import {
   collection,
@@ -31,7 +31,6 @@ interface PriceFiler {
   order: OrderByDirection;
 }
 
-
 export type SortQuery = NewestShoes | PriceFiler;
 
 export const useFilter = defineStore("filterShoes", {
@@ -42,8 +41,26 @@ export const useFilter = defineStore("filterShoes", {
       error: "",
     } as ShoesState,
   }),
-
   actions: {
+    // Searching a query in the search bar
+    async searchQuery(queryStr: string) {
+      this.filterState.shoes = [];
+      await getDocs(query(collection(db, "all"), where("name", "==", queryStr)))
+        .then((snapshot) =>
+          snapshot.docs.map((doc) => {
+            this.filterState.shoes.push({
+              data: fromFirestore(doc.data()),
+              id: doc.id,
+              quantity: 0,
+            });
+            this.filterState.isLoading = true;
+          })
+        )
+        .catch((err) => {
+          this.filterState.error = err;
+          this.filterState.isLoading = true;
+        });
+    },
     // async getFilterData(queryStr: string | string[]) {
     //   this.filterState.shoes = [];
     //   const filterArray
@@ -68,12 +85,14 @@ export const useFilter = defineStore("filterShoes", {
     // Implement sort
     async getSortData(queryStr: SortQuery) {
       this.filterState.shoes = [];
-      console.log(queryStr.sortBy, queryStr.order);
-      
+      try {
       const qSnap = await getDocs(
-        query(collection(db, "all"), orderBy(queryStr.sortBy, queryStr.order), limit(5))
+        query(
+          collection(db, "all"),
+          orderBy(queryStr.sortBy, queryStr.order),
+          limit(10)
+        )
       );
-
       qSnap.docs.map((doc) => {
         this.filterState.shoes.push({
           data: fromFirestore(doc.data()),
@@ -81,7 +100,10 @@ export const useFilter = defineStore("filterShoes", {
           quantity: 0,
         });
         this.filterState.isLoading = true;
-      });
+      });} catch(e) {
+        console.log("This was the error ", e);
+        
+      }
     },
   },
 });
