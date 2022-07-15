@@ -19,21 +19,13 @@ const fromFirestoreCodes = (doc: DocumentData): Promocode => {
   };
 };
 
-export const fromURLToQueryStr = (url: string): SortQuery => {
-  const arr = url.split("-");
+export const fromURLToQueryStr = (url: SortQuery): SortQuery => {
   return {
     type: "orderBy",
-    sortBy: fromSlugToFirebase(arr[0]),
-    slug: arr[0],
-    order: arr[1] as OrderByDirection,
+    sortBy: url.sortBy,
+    slug: url.slug,
+    order: url.order,
   };
-};
-
-const fromSlugToFirebase = (s: string) => {
-  if (s === "newest") {
-    return "timestamp";
-  }
-  return "price";
 };
 
 const IMAGE_KIT_URL = "https://ik.imagekit.io/sjsedov4q/";
@@ -42,7 +34,7 @@ const FIREBASE_STORAGE_BASE_URL =
 const getFromImageKit = (firebaseImage: string): string => {
   return (
     firebaseImage.replace(FIREBASE_STORAGE_BASE_URL, IMAGE_KIT_URL) +
-    "&tr-w-200,h-200"
+    "&tr=w-200,h-200"
   );
 };
 

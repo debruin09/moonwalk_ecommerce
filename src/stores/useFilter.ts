@@ -19,25 +19,20 @@ interface FilterError {
 }
 
 interface NewestShoes {
-  type: string;
+  type?: string;
   sortBy: string;
-  slug: string;
+  slug?: string;
   order: OrderByDirection;
 }
-interface LowestToHighest {
-  type: string;
+interface PriceFiler {
+  type?: string;
   sortBy: string;
-  slug: string;
-  order: OrderByDirection;
-}
-interface HighestToLowest {
-  type: string;
-  sortBy: string;
-  slug: string;
+  slug?: string;
   order: OrderByDirection;
 }
 
-export type SortQuery = NewestShoes | LowestToHighest | HighestToLowest;
+
+export type SortQuery = NewestShoes | PriceFiler;
 
 export const useFilter = defineStore("filterShoes", {
   state: () => ({
@@ -73,6 +68,8 @@ export const useFilter = defineStore("filterShoes", {
     // Implement sort
     async getSortData(queryStr: SortQuery) {
       this.filterState.shoes = [];
+      console.log(queryStr.sortBy, queryStr.order);
+      
       const qSnap = await getDocs(
         query(collection(db, "all"), orderBy(queryStr.sortBy, queryStr.order), limit(5))
       );

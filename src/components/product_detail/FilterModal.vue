@@ -30,18 +30,18 @@ const changePick = () => {
                 <div class="sort-by-wrapper py-5">
                     <h3 class="py-3">Sort By</h3>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="sort" type="radio" name="newest" value="newest-asc"
+                        <input @change="changePick" id="sort" type="radio" name="newest" value="timestamp-asc"
                             class="radio" v-model="picked" />
                         <label for="sort" class="ml-2  text-black text-lg dark:text-gray-300">Newest</label>
                     </div>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="hl" type="radio" name="hl" value="highLow-asc" class="radio"
+                        <input @change="changePick" id="hl" type="radio" name="hl" value="price-desc" class="radio"
                             v-model="picked" />
                         <label for="hl" class="ml-2  text-black text-lg dark:text-gray-300">Price:
                             Hight-Low</label>
                     </div>
                     <div class="flex items-center mb-2">
-                        <input @change="changePick" id="lh" type="radio" name="lh" value="lowHigh-asc" class="radio"
+                        <input @change="changePick" id="lh" type="radio" name="lh" value="price-asc" class="radio"
                             v-model="picked" />
                         <label for="lh" class="ml-2 text-black text-lg dark:text-gray-300">Price:
                             Low-High</label>

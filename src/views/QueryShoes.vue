@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { LocationQuery, useRoute } from "vue-router";
 import ProductCard from "../components/core/ProductCard.vue";
 import ProductCardSkeleton from "../components/core/ProductCardSkeleton.vue";
 import { onMounted, ref, watch } from "@vue/runtime-core";
 import { useFilter } from "../stores/useFilter";
 import { fromURLToQueryStr } from "../utils/firebaseUtils";
 import FilterModal from "../components/product_detail/FilterModal.vue";
+import { OrderByDirection } from 'firebase/firestore';
 
 const animatedModalVisible = ref(false);
 
@@ -14,19 +15,19 @@ const store = useFilter();
 
 const route = useRoute();
 
-
-const qOrderBy = route.query.orderBy as string;
-const qOrder = route.query.order as string;
-const q = qOrderBy.concat("-").concat(qOrder)
+const sortBy = route.query.orderBy as string;
+const order = route.query.order as OrderByDirection;
 
 onMounted(() => {
-    store.getSortData(fromURLToQueryStr(q));
-    watch(
-        () => route.query,
-        (_, __) => (route.name === "QueryShoes" ? store.getSortData(fromURLToQueryStr(q)) : {})
-    );
+    store.getSortData(fromURLToQueryStr({ sortBy, order: (route.query.order as OrderByDirection) }));
 });
-
+watch(
+    () => route.query,
+    (_, __) =>
+        (route.name === "QueryShoes")
+            ? store.getSortData(fromURLToQueryStr({ sortBy, order: (route.query.order as OrderByDirection) }))
+            : {}
+);
 </script>
 
 <template>
