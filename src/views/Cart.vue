@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CartItem from "../components/cart/CartItem.vue";
-import OrderSummary from "../components/cart/OrderSummary.vue";
+import CartOrderSummary from "../components/cart/CartOrderSummary.vue";
 import { useCart } from "../stores/useCart";
 
 const store = useCart();
@@ -32,10 +32,10 @@ const store = useCart();
         </router-link>
       </div>
 
-      <OrderSummary>
+      <CartOrderSummary>
         <template v-slot:subtotal>R{{ store.cartSubtotalPrice.toFixed(2) }}</template>
         <template v-slot:total>R{{ store.cartTotalPrice.toFixed(2) }}</template>
-      </OrderSummary>
+      </CartOrderSummary>
     </div>
     <div class="w-auto text-lg font-roboto font-light p-5" v-else>
       <p>IT LOOKS LIKE YOUR CART IS EMPTY.</p>
